@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Notas</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Formulário de Notas</h2>
+    <form id="cadastroForm">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula" required><br><br>
+
+        <label for="nota1">Nota 1:</label>
+        <input type="number" step="0.01" id="nota1" name="nota1" required><br><br>
+
+        <label for="nota2">Nota 2:</label>
+        <input type="number" step="0.01" id="nota2" name="nota2" required><br><br>
+
+        <button type="button" onclick="adicionarLinha()">Enviar</button>
+    </form>
+
+    <br>
+
+    <table id="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Nota 1</th>
+                <th>Nota 2</th>
+                <th>Média</th>
+                <th>Situação</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function adicionarLinha() {
+            var nome = document.getElementById('nome').value;
+            var matricula = document.getElementById('matricula').value;
+            var nota1 = parseFloat(document.getElementById('nota1').value);
+            var nota2 = parseFloat(document.getElementById('nota2').value);
+            var media = (nota1 + nota2) / 2;
+            var situacao = media > 5 ? 'Aprovado' : 'Reprovado';
+
+            var tabela = document.getElementById('tabela').getElementsByTagName('tbody')[0];
+            var novaLinha = tabela.insertRow(tabela.rows.length);
+
+            var colunaNome = novaLinha.insertCell(0);
+            var colunaMatricula = novaLinha.insertCell(1);
+            var colunaNota1 = novaLinha.insertCell(2);
+            var colunaNota2 = novaLinha.insertCell(3);
+            var colunaMedia = novaLinha.insertCell(4);
+            var colunaSituacao = novaLinha.insertCell(5);
+
+            colunaNome.innerHTML = nome;
+            colunaMatricula.innerHTML = matricula;
+            colunaNota1.innerHTML = nota1;
+            colunaNota2.innerHTML = nota2;
+            colunaMedia.innerHTML = media.toFixed(2);
+            colunaSituacao.innerHTML = situacao;
+        }
+    </script>
+</body>
+</html>
